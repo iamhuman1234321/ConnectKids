@@ -5,51 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ConnectKids | Why This Matters</title>
   <style>
-    :root{--accent:#2563eb;--muted:#6b7280;--card:#ffffff;--bg:#f9fafb}
+    :root{
+      --accent:#2563eb;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f9fafb;
+      --highlight:#eff6ff;
+    }
     *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:#111}
-    .container{max-width:900px;margin:0 auto;padding:28px}
-    h1{font-size:32px;margin:0 0 16px}
-    h2{margin-top:28px;font-size:22px}
-    p{color:var(--muted);line-height:1.5}
-    .stat{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 4px 14px rgba(16,24,40,0.05);margin-top:16px}
-    .big{font-size:40px;font-weight:700;color:var(--accent)}
-    .quote{margin-top:20px;padding:18px;border-left:4px solid var(--accent);background:#fff;border-radius:8px;color:var(--muted)}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:#111;line-height:1.6}
+    .container{max-width:1000px;margin:0 auto;padding:28px}
+    h1{font-size:36px;margin-bottom:24px;color:var(--accent)}
+    h2{margin-top:36px;font-size:26px;color:#111;border-bottom:2px solid var(--accent);padding-bottom:6px}
+    p, li{color:var(--muted)}
+    ul{margin-top:12px;margin-left:20px}
+    li{margin-bottom:10px}
+    .section-card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(16,24,40,0.08);margin-top:16px}
+    .big{font-size:40px;font-weight:700;color:var(--accent);margin-bottom:8px}
+    .quote{margin-top:20px;padding:18px;border-left:5px solid var(--accent);background:var(--highlight);border-radius:8px;color:var(--muted);font-style:italic}
     a{color:var(--accent);text-decoration:none}
   </style>
 </head>
 <body>
   <div class="container">
     <h1>The Opportunity Gap</h1>
-    <p>Millions of children in the United States want to join extracurricular programs but cannot. Cost lack of transportation limited local options low bandwidth and minimal public awareness prevent children from exploring their interests and building essential skills.</p>
 
-    <div class="stat">
-      <div class="big">22.6 million</div>
-      <p>Children whose parents want them in after school programs but cannot access one.</p>
+    <div class="section-card">
+      <h2>Scale</h2>
+      <ul>
+        <li>Millions of children are poor or low-income in the U.S. (~36–37 million people in poverty, 2023–2024 Census). Child poverty sharply affects those most likely to lack extracurricular access. <em>(Census.gov)</em></li>
+        <li>~15 million low-income children lacked summer programs in 2023; 24.6 million families report being unable to access afterschool programs, a 60% increase since 2004. <em>(Gallup.com, Afterschool Alliance)</em></li>
+        <li>Participation gaps persist: structured summer programs are ~2x more common among higher-income families (27% vs 14% in 2019). <em>(Wallace Foundation)</em></li>
+        <li>Extracurricular participation improves engagement, college attendance, and long-term outcomes. Each child with consistent access gains measurable lifelong benefits. <em>(NCES)</em></li>
+      </ul>
     </div>
 
-    <div class="stat">
-      <div class="big">77%</div>
-      <p>Of interested families are turned away because programs are full too expensive or unavailable in their area.</p>
+    <div class="section-card">
+      <h2>Neglectedness</h2>
+      <ul>
+        <li>Cost and accessibility are primary barriers. Many families wish to enroll children but cannot due to price, transport, or awareness. <em>(Afterschool Alliance)</em></li>
+        <li>Program capacity lags: nearly 3 in 4 families lack access in many areas. Unmet demand remains painfully high. <em>(Afterschool Alliance)</em></li>
+        <li>Policy and funding fluctuations create episodic gaps; tech and nonprofit solutions can scale quickly to fill them. <em>(TIME)</em></li>
+        <li>Takeaway: problem is both large (tens of millions affected) and under-resourced — strong argument for a focused solution.</li>
+      </ul>
     </div>
 
-    <div class="stat">
-      <div class="big">43%</div>
-      <p>Of U.S. children participate in no extracurricular activities at all indicating huge access gaps.</p>
-    </div>
-
-    <h2>A problem with little attention</h2>
-    <p>Studies show extracurricular access is one of the strongest predictors of later academic success yet national funding and public awareness remain extremely low. Compared to food security technology access or standardized testing extracurricular inequality receives far less national focus despite being deeply linked to emotional development creativity and opportunity.</p>
-
-    <div class="quote">
-      "Most families who want after school learning support cannot find it. The opportunity gap grows each year while demand keeps rising." 
-    </div>
-
-    <h2>Why ConnectKids exists</h2>
-    <p>Despite huge unmet demand free and online extracurriculars exist but are scattered and unreachable to many families. ConnectKids bridges that gap by collecting trusted free programs and making them easy to access regardless of location or income.</p>
-
-    <h2>Return to home</h2>
-    <p><a href="index.html">Back to homepage</a></p>
+    <p style="margin-top:16px"><a href="index.html">Back to Home</a></p>
   </div>
 </body>
 </html>
