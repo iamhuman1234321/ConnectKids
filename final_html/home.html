@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ConnectKids Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-white overflow-x-hidden">
+  <!-- Top Navigation (header will be injected here) -->
+  <header class="w-full sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-gray-100" id="site-header">
+    <!-- header.html will be loaded into here -->
+  </header>
+
+  <div>
+    <!-- Hero Section -->
+    <section class="relative py-20 lg:py-32">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 opacity-50"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Left Content -->
+          <div class="transition-all duration-700 transform translate-y-5 opacity-0" data-animate="hero-left">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-sm font-semibold mb-6 shadow-lg">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Free for Every Child</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              Connect Children to
+              <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Free Opportunities
+              </span>
+            </h1>
+
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+              Every child deserves to explore their passions. We connect families from low-income communities with free online extracurriculars in arts, science, coding, sports, and more.
+            </p>
+
+            <div class="flex flex-wrap gap-4 mb-8">
+              <a data-page="Opportunities">
+                <button class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl transition-all inline-flex items-center">
+                  Find Programs
+                  <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </button>
+              </a>
+              <a data-page="CreateOpportunity">
+                <button class="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg rounded-xl font-semibold inline-flex items-center bg-white">
+                  Create Opportunity
+                </button>
+              </a>
+            </div>
+
+            <div class="flex items-center gap-6 text-sm text-gray-600">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+                <span>No cost</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+                <span>Vetted programs</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-green-500"></i>
+                <span>Age-matched</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right - Quick Match Card -->
+          <div
+            class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 transition-all duration-700 transform translate-y-5 opacity-0"
+            data-animate="hero-right"
+          >
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900">Quick Match</h3>
+                <p class="text-sm text-gray-500">Find programs instantly</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                  Age Range
+                </label>
+                <select
+                  id="ageRange"
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
+                >
+                  <option value="6-8">6 to 8 years</option>
+                  <option value="9-11" selected>9 to 11 years</option>
+                  <option value="12-14">12 to 14 years</option>
+                  <option value="15-18">15 to 18 years</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                  Interest
+                </label>
+                <select
+                  id="interest"
+                  class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
+                >
+                  <option value="arts">Arts and Crafts</option>
+                  <option value="music">Music</option>
+                  <option value="stem">STEM</option>
+                  <option value="sports">Sports and Fitness</option>
+                  <option value="coding" selected>Coding</option>
+                </select>
+              </div>
+
+              <a data-page="Opportunities" class="block">
+                <button class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all inline-flex items-center justify-center">
+                  Show Free Options
+                  <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </button>
+              </a>
+            </div>
+
+            <div class="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
+              <p class="text-sm text-gray-600 flex items-center gap-2">
+                <i data-lucide="shield" class="w-4 h-4 text-purple-600"></i>
+                <span>All programs are vetted and completely free</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center transition-all duration-700 transform translate-y-5 opacity-0" data-animate="stat">
+            <div class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
+              36M
+            </div>
+            <div class="text-xl font-semibold mb-1">People in Poverty</div>
+            <div class="text-sm text-gray-300">Need Access</div>
+          </div>
+
+          <div class="text-center transition-all duration-700 transform translate-y-5 opacity-0" data-animate="stat">
+            <div class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
+              15M
+            </div>
+            <div class="text-xl font-semibold mb-1">Children Without</div>
+            <div class="text-sm text-gray-300">Summer Programs</div>
+          </div>
+
+          <div class="text-center transition-all duration-700 transform translate-y-5 opacity-0" data-animate="stat">
+            <div class="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent">
+              24.6M
+            </div>
+            <div class="text-xl font-semibold mb-1">Families Denied</div>
+            <div class="text-sm text-gray-300">After-school Access</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <div class="transition-all duration-700 transform translate-y-5 opacity-0" data-animate="features-header">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">
+              Why Choose ConnectKids?
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              We remove every barrier standing between children and their potential
+            </p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 opacity-0 transform translate-y-5"
+            data-animate="feature"
+          >
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i data-lucide="heart" class="w-8 h-8 text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Completely Free
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Zero cost to families. No hidden fees, ever.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 opacity-0 transform translate-y-5"
+            data-animate="feature"
+          >
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i data-lucide="globe-2" class="w-8 h-8 text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Low-Tech Friendly
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Works with basic phones and low bandwidth.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 opacity-0 transform translate-y-5"
+            data-animate="feature"
+          >
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i data-lucide="users" class="w-8 h-8 text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">
+              Expert Mentors
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              Learn from volunteers and professionals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Explore Categories
+          </h2>
+          <p class="text-lg text-gray-600">
+            Over 100+ free programs across 5 interest areas
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <!-- Category 1 -->
+          <a
+            data-page="Opportunities"
+            class="bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 block"
+          >
+            <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">
+              🎨
+            </div>
+            <div class="font-bold text-gray-900 mb-1">Arts &amp; Crafts</div>
+            <div class="text-sm text-gray-500">24 programs</div>
+          </a>
+
+          <!-- Category 2 -->
+          <a
+            data-page="Opportunities"
+            class="bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 block"
+          >
+            <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">
+              🎵
+            </div>
+            <div class="font-bold text-gray-900 mb-1">Music</div>
+            <div class="text-sm text-gray-500">18 programs</div>
+          </a>
+
+          <!-- Category 3 -->
+          <a
+            data-page="Opportunities"
+            class="bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 block"
+          >
+            <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">
+              🔬
+            </div>
+            <div class="font-bold text-gray-900 mb-1">STEM</div>
+            <div class="text-sm text-gray-500">20 programs</div>
+          </a>
+
+          <!-- Category 4 -->
+          <a
+            data-page="Opportunities"
+            class="bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 block"
+          >
+            <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">
+              ⚽
+            </div>
+            <div class="font-bold text-gray-900 mb-1">Sports</div>
+            <div class="text-sm text-gray-500">16 programs</div>
+          </a>
+
+          <!-- Category 5 -->
+          <a
+            data-page="Opportunities"
+            class="bg-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:-translate-y-1 block"
+          >
+            <div class="text-5xl mb-3 group-hover:scale-110 transition-transform">
+              💻
+            </div>
+            <div class="font-bold text-gray-900 mb-1">Coding</div>
+            <div class="text-sm text-gray-500">22 programs</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            How It Works
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- For Families -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 opacity-0 transform translate-x-5 transition-all duration-700"
+            data-animate="how-left"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl">
+                1
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">For Families</h3>
+            </div>
+            <ol class="space-y-3 text-gray-600 ml-15">
+              <li class="flex items-start gap-3">
+                <span class="text-purple-600 font-semibold">→</span>
+                Tell us your child's age, interests and availability
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-purple-600 font-semibold">→</span>
+                We match them to vetted free programs
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-purple-600 font-semibold">→</span>
+                Sign up and start learning—completely free
+              </li>
+            </ol>
+          </div>
+
+          <!-- For Volunteers -->
+          <div
+            class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 opacity-0 transform -translate-x-5 transition-all duration-700"
+            data-animate="how-right"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-xl">
+                2
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">For Volunteers</h3>
+            </div>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              If you run a free program or want to volunteer, share your offering with us. We handle outreach and scheduling so you can focus on teaching.
+            </p>
+            <a data-page="CreateOpportunity">
+              <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white inline-flex items-center px-4 py-2 rounded-lg">
+                Share a Program
+                <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Preview Section -->
+    <section class="py-20 bg-gradient-to-br from-emerald-50 via-blue-50 to-purple-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="text-center mb-12 opacity-0 transform translate-y-5 transition-all duration-700"
+          data-animate="impact-preview-header"
+        >
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-100 to-blue-100 rounded-full mb-4">
+            <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
+            <span class="text-sm font-semibold text-green-600">See Our Long-Term Vision</span>
+          </div>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            How Big Can
+            <span class="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+              ConnectKids
+            </span>
+            Go?
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            We’re not just listing programs. We’re building a roadmap to reach millions of families, boost participation, and change systems.
+          </p>
+        </div>
+
+        <div
+          class="grid lg:grid-cols-[2fr,1.4fr] gap-8 items-stretch opacity-0 transform translate-y-5 transition-all duration-700"
+          data-animate="impact-preview-body"
+        >
+          <!-- Impact Summary Card -->
+          <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-10">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center">
+                <i data-lucide="target" class="w-7 h-7 text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900">Our Impact Scale</h3>
+                <p class="text-sm text-gray-500">4 levels • 5+ year roadmap</p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-6 mb-8">
+              <div class="p-4 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100">
+                <div class="flex items-center gap-2 mb-1">
+                  <i data-lucide="users" class="w-4 h-4 text-green-600"></i>
+                  <span class="text-xs font-semibold uppercase text-green-700 tracking-wide">Level 1–2</span>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">3.2M+</div>
+                <p class="text-xs text-gray-600 mt-1">Families &amp; children we aim to reach and engage.</p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100">
+                <div class="flex items-center gap-2 mb-1">
+                  <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
+                  <span class="text-xs font-semibold uppercase text-blue-700 tracking-wide">Level 3</span>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">Skills</div>
+                <p class="text-xs text-gray-600 mt-1">Measurable growth in skills, STEM interest, and readiness.</p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-50 to-rose-50 border border-amber-100">
+                <div class="flex items-center gap-2 mb-1">
+                  <i data-lucide="award" class="w-4 h-4 text-amber-600"></i>
+                  <span class="text-xs font-semibold uppercase text-amber-700 tracking-wide">Level 4</span>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">Systems</div>
+                <p class="text-xs text-gray-600 mt-1">Long-term policy and school district integration.</p>
+              </div>
+            </div>
+
+            <p class="text-gray-700 mb-6 leading-relaxed">
+              Our <span class="font-semibold">Impact Scale</span> breaks down how ConnectKids can go from
+              awareness and matching to participation, skill growth, and true systems change. Each level has
+              concrete targets, timelines, and milestones.
+            </p>
+
+            <div class="flex flex-wrap gap-3 items-center">
+              <a data-page="Impact">
+                <button class="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold text-sm shadow-lg hover:shadow-xl hover:from-green-700 hover:to-blue-700 transition-all">
+                  View Full Impact Roadmap
+                  <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                </button>
+              </a>
+              <span class="text-xs text-gray-500">
+                Learn how today’s free programs fit into a multi-year strategy.
+              </span>
+            </div>
+          </div>
+
+          <!-- Vertical Highlight Card -->
+          <div class="bg-gradient-to-br from-gray-900 via-slate-900 to-indigo-900 rounded-3xl text-white p-8 lg:p-10 shadow-2xl flex flex-col justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300 mb-3">
+                WHY IMPACT MATTERS
+              </p>
+              <h3 class="text-2xl font-bold mb-4">
+                We’re designing for scale, not just one-off programs.
+              </h3>
+              <p class="text-sm text-white/80 mb-6">
+                The Impact page shows how family signups today ladder up into millions served,
+                improved outcomes, and eventually policy-level change. It’s our blueprint for
+                turning a simple matching platform into a nationwide movement.
+              </p>
+            </div>
+
+            <div class="space-y-3 text-sm text-white/80">
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300"></i>
+                <span>Concrete targets for each growth level.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300"></i>
+                <span>Focus on underserved communities and low-tech access.</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-300"></i>
+                <span>Clear path for funders, volunteers, and partners to plug in.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="transition-all duration-700 transform translate-y-5 opacity-0" data-animate="cta">
+          <i data-lucide="rocket" class="w-16 h-16 mx-auto mb-6"></i>
+          <h2 class="text-4xl font-bold mb-6">
+            Ready to Unlock Opportunities?
+          </h2>
+          <p class="text-xl mb-8 text-white/90">
+            Join thousands of families giving their children access to free, quality extracurriculars
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a data-page="Opportunities">
+              <button class="bg-white text-purple-600 hover:bg-gray-100 px-8 py-6 text-lg rounded-xl font-semibold shadow-xl inline-flex items-center">
+                Browse Programs
+                <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+              </button>
+            </a>
+            <a data-page="Donate">
+              <button class="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-xl font-semibold inline-flex items-center bg-transparent">
+                Support Our Mission
+                <i data-lucide="heart" class="ml-2 w-5 h-5"></i>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ---------- ROUTES ----------
+    function createPageUrl(page) {
+      const routes = {
+        Home: "home.html",
+        Opportunities: "opportunities.html",
+        CreateOpportunity: "create-opportunity.html",
+        Donate: "donate.html",
+        CompleteProfile: "complete-profile.html",
+        Impact: "impact.html",
+        Statistics: "statistics.html"
+      };
+      return routes[page] || "home.html";
+    }
+
+    function wireRouting() {
+      document.querySelectorAll("[data-page]").forEach((el) => {
+        const page = el.getAttribute("data-page");
+        const url = createPageUrl(page);
+
+        if (el.tagName.toLowerCase() === "a") {
+          el.setAttribute("href", url);
+        } else {
+          el.addEventListener("click", () => {
+            window.location.href = url;
+          });
+        }
+      });
+    }
+
+    function initIcons() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const headerEl = document.getElementById("site-header");
+
+      // Fallback header markup if header.html can't be fetched (e.g. file://)
+      const fallbackHeader = `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+            </div>
+            <a data-page="Home" class="text-lg font-bold tracking-tight text-gray-900 hover:text-purple-600 cursor-pointer">
+              ConnectKids
+            </a>
+          </div>
+          <nav class="hidden sm:flex items-center gap-6 text-sm font-medium">
+            <a data-page="Opportunities" class="text-gray-600 hover:text-purple-600 cursor-pointer">Programs</a>
+            <a data-page="CreateOpportunity" class="text-gray-600 hover:text-purple-600 cursor-pointer">Create Opportunity</a>
+            <a data-page="Impact" class="text-gray-600 hover:text-purple-600 cursor-pointer">Impact</a>
+            <a data-page="Statistics" class="text-gray-600 hover:text-purple-600 cursor-pointer">Statistics</a>
+            <a data-page="Donate" class="text-gray-600 hover:text-purple-600 cursor-pointer">Donate</a>
+          </nav>
+        </div>
+      `;
+
+      if (headerEl) {
+        fetch("header.html")
+          .then((res) => {
+            if (!res.ok) throw new Error("Failed to load header.html");
+            return res.text();
+          })
+          .then((html) => {
+            headerEl.innerHTML = html;
+          })
+          .catch(() => {
+            // If fetch fails (e.g. running off file://), use fallback
+            headerEl.innerHTML = fallbackHeader;
+          })
+          .finally(() => {
+            wireRouting();
+            initIcons();
+          });
+      } else {
+        wireRouting();
+        initIcons();
+      }
+
+      // ---------- PAGE-SPECIFIC STUFF (unchanged from before) ----------
+
+      // IntersectionObserver for animations
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              el.classList.remove('opacity-0', 'translate-y-5', 'translate-x-5', '-translate-x-5');
+              el.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+              observer.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+      // base44.auth.me() check
+      if (window.base44 && window.base44.auth && typeof window.base44.auth.me === 'function') {
+        window.base44.auth.me()
+          .then(function (currentUser) {
+            if (currentUser && !currentUser.user_type) {
+              window.location.href = createPageUrl('CompleteProfile');
+            }
+          })
+          .catch(function () {
+            // on error, treat as logged out (no redirect)
+          });
+      }
+    });
+  </script>
+
+</body>
+</html>
