@@ -1,0 +1,96 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Users, Calendar, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+
+const categoryColors = {
+  arts: 'bg-pink-100 text-pink-700 border-pink-200',
+  music: 'bg-purple-100 text-purple-700 border-purple-200',
+  stem: 'bg-blue-100 text-blue-700 border-blue-200',
+  sports: 'bg-green-100 text-green-700 border-green-200',
+  coding: 'bg-orange-100 text-orange-700 border-orange-200'
+};
+
+const categoryEmojis = {
+  arts: '🎨',
+  music: '🎵',
+  stem: '🔬',
+  sports: '⚽',
+  coding: '💻'
+};
+
+export default function OpportunityCard({ opportunity, index, onSignup }) {
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
+      className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden group hover:-translate-y-1"
+    >
+      {/* Card Header with Gradient */}
+      <div className="h-3 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+      
+      <div className="p-6">
+        {/* Category Badge & Featured */}
+        <div className="flex items-center justify-between mb-4">
+          <Badge className={`${categoryColors[opportunity.interest]} border font-semibold`}>
+            <span className="mr-1">{categoryEmojis[opportunity.interest]}</span>
+            {opportunity.interest.charAt(0).toUpperCase() + opportunity.interest.slice(1)}
+          </Badge>
+          {opportunity.featured && (
+            <div className="flex items-center gap-1 text-yellow-600">
+              <Sparkles className="w-4 h-4" />
+              <span className="text-xs font-semibold">Featured</span>
+            </div>
+          )}
+        </div>
+
+        {/* Title */}
+        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+          {opportunity.title}
+        </h3>
+
+        {/* Description */}
+        <p className="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">
+          {opportunity.description}
+        </p>
+
+        {/* Meta Information */}
+        <div className="flex items-center gap-4 mb-4 text-sm text-gray-500">
+          <div className="flex items-center gap-1">
+            <Calendar className="w-4 h-4" />
+            <span>Ages {opportunity.age_range}</span>
+          </div>
+          {opportunity.organization && (
+            <div className="flex items-center gap-1">
+              <Users className="w-4 h-4" />
+              <span className="truncate">{opportunity.organization}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Actions */}
+        <div className="flex gap-2">
+          <Button
+            onClick={onSignup}
+            className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl"
+          >
+            Sign Up Free
+          </Button>
+          {opportunity.link && (
+            <Button
+              variant="outline"
+              className="border-2 border-gray-200 hover:border-purple-300"
+              onClick={() => window.open(opportunity.link, '_blank')}
+            >
+              <ExternalLink className="w-4 h-4" />
+            </Button>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
