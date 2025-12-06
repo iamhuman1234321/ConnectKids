@@ -1,0 +1,55 @@
+{
+  "name": "Opportunity",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the opportunity"
+    },
+    "age_range": {
+      "type": "string",
+      "enum": [
+        "6-8",
+        "9-11",
+        "12-14",
+        "15-18"
+      ],
+      "description": "Target age range"
+    },
+    "interest": {
+      "type": "string",
+      "enum": [
+        "arts",
+        "music",
+        "stem",
+        "sports",
+        "coding"
+      ],
+      "description": "Category of interest"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the program"
+    },
+    "link": {
+      "type": "string",
+      "description": "Website or platform URL"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Volunteer or organization name"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to feature this opportunity"
+    }
+  },
+  "required": [
+    "title",
+    "age_range",
+    "interest",
+    "description",
+    "link"
+  ]
+}
