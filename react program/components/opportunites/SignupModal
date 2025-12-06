@@ -1,0 +1,153 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, CheckCircle, Loader2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+
+export default function SignupModal({ opportunity, onClose }) {
+  const [childName, setChildName] = useState('');
+  const [parentEmail, setParentEmail] = useState('');
+  const [childAge, setChildAge] = useState(opportunity.age_range || '9-11');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!childName.trim() || !parentEmail.trim()) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setSubmitted(true);
+
+    // Close modal after 2 seconds
+    setTimeout(() => {
+      onClose();
+    }, 2000);
+  };
+
+  return (
+    <AnimatePresence>
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="bg-white rounded-2xl max-w-md w-full shadow-2xl"
+        >
+          {!submitted ? (
+            <>
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Sign Up
+                </h2>
+                <button
+                  onClick={onClose}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
+
+              {/* Body */}
+              <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <div className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl mb-4">
+                  <p className="font-semibold text-gray-900 mb-1">{opportunity.title}</p>
+                  <p className="text-sm text-gray-600">{opportunity.interest} • Ages {opportunity.age_range}</p>
+                </div>
+
+                <div>
+                  <Label htmlFor="childName" className="text-sm font-semibold text-gray-700">
+                    Child's Name *
+                  </Label>
+                  <Input
+                    id="childName"
+                    value={childName}
+                    onChange={(e) => setChildName(e.target.value)}
+                    placeholder="Enter child's name"
+                    className="mt-2 rounded-xl border-2"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="parentEmail" className="text-sm font-semibold text-gray-700">
+                    Parent Email *
+                  </Label>
+                  <Input
+                    id="parentEmail"
+                    type="email"
+                    value={parentEmail}
+                    onChange={(e) => setParentEmail(e.target.value)}
+                    placeholder="parent@example.com"
+                    className="mt-2 rounded-xl border-2"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="childAge" className="text-sm font-semibold text-gray-700">
+                    Child's Age Range
+                  </Label>
+                  <select
+                    id="childAge"
+                    value={childAge}
+                    onChange={(e) => setChildAge(e.target.value)}
+                    className="mt-2 w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
+                  >
+                    <option value="6-8">6-8 years</option>
+                    <option value="9-11">9-11 years</option>
+                    <option value="12-14">12-14 years</option>
+                    <option value="15-18">15-18 years</option>
+                  </select>
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-6 rounded-xl text-lg font-semibold"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      Signing Up...
+                    </>
+                  ) : (
+                    'Complete Signup'
+                  )}
+                </Button>
+
+                <p className="text-xs text-gray-500 text-center">
+                  More information will be sent to your email
+                </p>
+              </form>
+            </>
+          ) : (
+            <div className="p-8 text-center">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', duration: 0.5 }}
+              >
+                <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-4" />
+              </motion.div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">You're All Set!</h3>
+              <p className="text-gray-600">
+                Check your email for next steps and program details.
+              </p>
+            </div>
+          )}
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+}
