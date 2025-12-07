@@ -8,6 +8,14 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet CSS & JS for map -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+  </script>
 </head>
 <body class="bg-white overflow-x-hidden">
 
@@ -141,6 +149,17 @@
         </a>
       </section>
 
+      <!-- Map Section -->
+      <section class="mb-10">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-semibold text-gray-800">Map of Opportunities</h3>
+          <p class="text-xs text-gray-500">
+            Only programs with coordinates appear on the map.
+          </p>
+        </div>
+        <div id="opportunity-map" class="w-full h-80 rounded-2xl border border-gray-200 shadow-sm"></div>
+      </section>
+
       <!-- Loading State -->
       <section id="loading-state" class="flex flex-col items-center justify-center py-20">
         <i data-lucide="loader-2" class="w-12 h-12 text-purple-600 animate-spin mb-4"></i>
@@ -210,6 +229,9 @@
         description: "Join MITES Summer (formerly MITES) for our six-week, on-campus program that immerses students from across the country in life at MIT.",
         link: "https://mites.mit.edu/discover-mites/mites-summer/",
         organization: "MIT",
+        // Approx MIT campus
+        lat: 42.3601,
+        lng: -71.0942,
         created_at: "2025-01-01T00:00:00.000Z"
       },
       {
@@ -220,6 +242,9 @@
         description: "Free online art classes from top universities, designed for kids in low-bandwidth households.",
         link: "https://online.duke.edu/course/art-of-the-mooc/",
         organization: "Duke University",
+        // Approx Duke University, Durham NC
+        lat: 36.0014,
+        lng: -78.9382,
         created_at: "2025-01-02T00:00:00.000Z"
       },
       {
@@ -230,9 +255,63 @@
         description: "An engaging coding program that teaches young kids the basics of programming using Scratch, fostering creativity and problem-solving skills.",
         link: "https://www.codemonkey.com/glp-scratch-coding-for-kids-abs/",
         organization: "Code Monkey",
+        // Online only – no coordinates
+        lat: null,
+        lng: null,
         created_at: "2025-01-03T00:00:00.000Z"
       }
     ];
+
+    // ---------- MAP STATE ----------
+    let opportunityMap = null;
+    let markersLayer = null;
+
+    function initMap() {
+      const mapEl = document.getElementById("opportunity-map");
+      if (!mapEl || !window.L) return;
+
+      // Center on US by default
+      opportunityMap = L.map("opportunity-map").setView([39.5, -98.35], 4);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(opportunityMap);
+
+      markersLayer = L.layerGroup().addTo(opportunityMap);
+    }
+
+    function updateMap(opportunities) {
+      if (!opportunityMap || !markersLayer || !window.L) return;
+
+      markersLayer.clearLayers();
+
+      const coords = [];
+
+      opportunities.forEach((opp) => {
+        const hasCoords =
+          typeof opp.lat === "number" &&
+          !Number.isNaN(opp.lat) &&
+          typeof opp.lng === "number" &&
+          !Number.isNaN(opp.lng);
+
+        if (!hasCoords) return;
+
+        const marker = L.marker([opp.lat, opp.lng]).addTo(markersLayer);
+        const org = opp.organization ? `<br><span style="font-size: 11px; color: #666;">${opp.organization}</span>` : "";
+        marker.bindPopup(`<strong>${opp.title || "Opportunity"}</strong>${org}`);
+
+        coords.push([opp.lat, opp.lng]);
+      });
+
+      if (coords.length > 0) {
+        const bounds = L.latLngBounds(coords);
+        opportunityMap.fitBounds(bounds, { padding: [30, 30] });
+      } else {
+        // Reset back to default US view if nothing to show
+        opportunityMap.setView([39.5, -98.35], 4);
+      }
+    }
 
     // ---------- RENDERING ----------
     function getInterestMeta(interest) {
@@ -283,6 +362,12 @@
             })
           : "";
 
+        const hasCoords =
+          typeof opp.lat === "number" &&
+          !Number.isNaN(opp.lat) &&
+          typeof opp.lng === "number" &&
+          !Number.isNaN(opp.lng);
+
         const card = document.createElement("article");
         card.className =
           "bg-white rounded-2xl shadow-xl border border-gray-100 p-6 flex flex-col justify-between hover:shadow-2xl transition-all hover:-translate-y-1";
@@ -308,7 +393,15 @@
 
             ${
               opp.organization
-                ? `<p class="text-xs text-gray-500 mb-2">Hosted by <span class="font-semibold">${opp.organization}</span></p>`
+                ? `<p class="text-xs text-gray-500 mb-1">Hosted by <span class="font-semibold">${opp.organization}</span></p>`
+                : ""
+            }
+
+            ${
+              hasCoords
+                ? `<p class="text-xs text-gray-400 mb-1">
+                     Location: ${opp.lat.toFixed(3)}, ${opp.lng.toFixed(3)}
+                   </p>`
                 : ""
             }
 
@@ -382,6 +475,9 @@
           console.error("Error loading header.html:", err);
         });
 
+      // Init map
+      initMap();
+
       const localOpportunities = loadLocalOpportunities();
 
       // Merge local + seed; sort by created_at desc, newest first
@@ -430,6 +526,7 @@
       function refresh() {
         const filtered = applyFilters(combined, state);
         renderOpportunities(filtered);
+        updateMap(filtered);
       }
 
       // Initial render
